@@ -1,0 +1,54 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "127.0.0.1:8000:8000"
+        env_file:
+            - ./src/specialist-booking-service/.env
+        environment:
+            APP_ENV: local
+            APP_DEBUG: "true"
+            APP_URL: http://localhost:8000
+            DB_CONNECTION: pgsql
+            DB_HOST: db
+            DB_PORT: "5432"
+            DB_DATABASE: booking
+            DB_USERNAME: booking
+            DB_PASSWORD: booking_local
+            SESSION_DRIVER: database
+            CACHE_STORE: database
+            QUEUE_CONNECTION: sync
+        depends_on:
+            db:
+                condition: service_healthy
+        healthcheck:
+            test:
+                - CMD
+                - php
+                - -r
+                - "exit(@file_get_contents('http://127.0.0.1:8000/up') === false ? 1 : 0);"
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+    db:
+        image: postgres:16
+        ports:
+            - "127.0.0.1:5433:5432"
+        environment:
+            POSTGRES_DB: booking
+            POSTGRES_USER: booking
+            POSTGRES_PASSWORD: booking_local
+        volumes:
+            - database_data:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U booking -d booking"]
+            interval: 5s
+            timeout: 5s
+            retries: 10
+
+volumes:
+    database_data:
