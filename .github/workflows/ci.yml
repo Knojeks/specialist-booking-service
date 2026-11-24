@@ -32,8 +32,8 @@ jobs:
       - name: Download repository
         uses: actions/checkout@v6
 
-      - name: Download repository
-        uses: actions/checkout@v6
+      - name: Check merge protection
+        run: exit 1
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
