@@ -34,6 +34,7 @@ COPY src/specialist-booking-service/composer.json ./composer.json
 COPY src/specialist-booking-service/app ./app
 COPY src/specialist-booking-service/config ./config
 COPY src/specialist-booking-service/database/migrations ./database/migrations
+COPY src/specialist-booking-service/database/seeders ./database/seeders
 COPY src/specialist-booking-service/public ./public
 COPY src/specialist-booking-service/resources ./resources
 COPY src/specialist-booking-service/routes ./routes
