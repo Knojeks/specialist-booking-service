@@ -1,42 +1,41 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Вход</title>
-</head>
-<body>
-<h1>Вход в личный кабинет</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+@section('title', 'Вход — Запись к врачу')
 
-<form method="POST" action="{{ route('login') }}">
-    @csrf
+@section('content')
+    <section class="card" aria-labelledby="login-title">
+        <h1 id="login-title">С возвращением</h1>
+        <p class="subtitle">
+            Войдите, чтобы управлять своими записями.
+        </p>
 
-    <p>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email"
-               value="{{ old('email') }}"
-               autocomplete="username" required>
-    </p>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-    <p>
-        <label for="password">Пароль</label>
-        <input id="password" name="password" type="password"
-               autocomplete="current-password" required>
-    </p>
+            <x-form-field
+                name="email"
+                label="Email"
+                type="email"
+                autocomplete="username"
+                required
+            />
 
-    <button type="submit">Войти</button>
-</form>
+            <x-form-field
+                name="password"
+                label="Пароль"
+                type="password"
+                autocomplete="current-password"
+                required
+            />
 
-<p>
-    <a href="{{ route('register') }}">Зарегистрироваться</a>
-</p>
-</body>
-</html>
+            <button class="button button-full" type="submit">
+                Войти
+            </button>
+        </form>
+
+        <p class="form-footer">
+            Нет аккаунта?
+            <a href="{{ route('register') }}">Зарегистрироваться</a>
+        </p>
+    </section>
+@endsection

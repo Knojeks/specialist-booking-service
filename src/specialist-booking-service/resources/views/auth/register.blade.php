@@ -1,53 +1,60 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Регистрация</title>
-</head>
-<body>
-<h1>Регистрация</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+@section('title', 'Регистрация — Запись к врачу')
 
-<form method="POST" action="{{ route('register') }}">
-    @csrf
+@section('content')
+    <section class="card" aria-labelledby="register-title">
+        <h1 id="register-title">Создать аккаунт</h1>
+        <p class="subtitle">
+            Зарегистрируйтесь, чтобы записываться к врачу.
+        </p>
 
-    <p>
-        <label for="name">Имя</label>
-        <input id="name" name="name" type="text"
-               value="{{ old('name') }}" required>
-    </p>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-    <p>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email"
-               value="{{ old('email') }}" required>
-    </p>
+            <x-form-field
+                name="name"
+                label="Имя"
+                autocomplete="name"
+                maxlength="255"
+                required
+            />
 
-    <p>
-        <label for="password">Пароль</label>
-        <input id="password" name="password" type="password"
-               minlength="8" required>
-    </p>
+            <x-form-field
+                name="email"
+                label="Email"
+                type="email"
+                autocomplete="email"
+                maxlength="255"
+                required
+            />
 
-    <p>
-        <label for="password_confirmation">Повторите пароль</label>
-        <input id="password_confirmation" name="password_confirmation"
-               type="password" minlength="8" required>
-    </p>
+            <x-form-field
+                name="password"
+                label="Пароль"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                required
+            />
 
-    <button type="submit">Зарегистрироваться</button>
-</form>
+            <x-form-field
+                name="password_confirmation"
+                label="Повторите пароль"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                required
+            />
 
-<p>
-    <a href="{{ route('login') }}">Уже есть аккаунт? Войти</a>
-</p>
-</body>
-</html>
+            <button class="button button-full" type="submit">
+                Зарегистрироваться
+            </button>
+        </form>
+
+        <p class="form-footer">
+            Уже есть аккаунт?
+            <a href="{{ route('login') }}">Войти</a>
+        </p>
+    </section>
+@endsection

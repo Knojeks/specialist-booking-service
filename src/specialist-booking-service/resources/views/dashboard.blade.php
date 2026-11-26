@@ -1,23 +1,34 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Личный кабинет</title>
-</head>
-<body>
-<h1>Личный кабинет</h1>
+@extends('layouts.app')
 
-@if (session('status'))
-    <p>{{ session('status') }}</p>
-@endif
+@section('title', 'Личный кабинет — Запись к врачу')
 
-<p>Вы вошли как {{ auth()->user()->name }}.</p>
-<p>Email: {{ auth()->user()->email }}</p>
+@section('content')
+    <section class="card" aria-labelledby="dashboard-title">
+        <h1 id="dashboard-title">Личный кабинет</h1>
+        <p class="subtitle">
+            Здравствуйте, {{ auth()->user()->name }}!
+        </p>
 
-<form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit">Выйти</button>
-</form>
-</body>
-</html>
+        @if (session('status'))
+            <div class="notice" role="status">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        <dl class="profile-details">
+            <dt>Имя</dt>
+            <dd>{{ auth()->user()->name }}</dd>
+
+            <dt>Email</dt>
+            <dd>{{ auth()->user()->email }}</dd>
+        </dl>
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <button class="button button-full" type="submit">
+                Выйти из аккаунта
+            </button>
+        </form>
+    </section>
+@endsection

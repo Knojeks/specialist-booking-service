@@ -23,6 +23,20 @@ RUN composer install \
     --no-interaction \
     --no-progress
 
+FROM node:24-alpine AS frontend
+
+WORKDIR /app
+
+COPY src/specialist-booking-service/package.json \
+     src/specialist-booking-service/package-lock.json ./
+
+RUN npm ci
+
+COPY src/specialist-booking-service/vite.config.js ./vite.config.js
+COPY src/specialist-booking-service/resources ./resources
+COPY --from=dependencies /var/www/html/vendor ./vendor
+
+RUN npm run build
 
 FROM base AS application
 
@@ -35,6 +49,7 @@ COPY src/specialist-booking-service/app ./app
 COPY src/specialist-booking-service/config ./config
 COPY src/specialist-booking-service/database/migrations ./database/migrations
 COPY src/specialist-booking-service/public ./public
+COPY --from=frontend /app/public/build ./public/build
 COPY src/specialist-booking-service/resources ./resources
 COPY src/specialist-booking-service/routes ./routes
 
