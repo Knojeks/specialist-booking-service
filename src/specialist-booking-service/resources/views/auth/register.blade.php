@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Регистрация</title>
+</head>
+<body>
+<h1>Регистрация</h1>
+
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
+<form method="POST" action="{{ route('register') }}">
+    @csrf
+
+    <p>
+        <label for="name">Имя</label>
+        <input id="name" name="name" type="text"
+               value="{{ old('name') }}" required>
+    </p>
+
+    <p>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email"
+               value="{{ old('email') }}" required>
+    </p>
+
+    <p>
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password"
+               minlength="8" required>
+    </p>
+
+    <p>
+        <label for="password_confirmation">Повторите пароль</label>
+        <input id="password_confirmation" name="password_confirmation"
+               type="password" minlength="8" required>
+    </p>
+
+    <button type="submit">Зарегистрироваться</button>
+</form>
+
+<p>
+    <a href="{{ route('login') }}">Уже есть аккаунт? Войти</a>
+</p>
+</body>
+</html>
