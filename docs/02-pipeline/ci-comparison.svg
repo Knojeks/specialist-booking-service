@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470">
+<rect width="900" height="470" fill="white"/>
+<g font-family="Arial, sans-serif" fill="#172b4d">
+<text x="24" y="32" font-size="22">Медианы времени CI — отдельные показатели</text>
+<text x="24" y="65" font-size="18">Длительность одной задачи CI: до и после кеширования</text>
+<text x="24" y="107" font-size="16">Без кеширования</text>
+<rect x="300" y="85" width="475.3" height="32" rx="4" fill="#7c8ba1"/>
+<text x="785.3" y="107" font-size="16">97 с</text>
+<text x="24" y="157" font-size="16">Кеш Composer</text>
+<rect x="300" y="135" width="460.6" height="32" rx="4" fill="#5284cf"/>
+<text x="770.5999999999999" y="157" font-size="16">94 с</text>
+<text x="24" y="207" font-size="16">Кеш Composer и Docker</text>
+<rect x="300" y="185" width="186.2" height="32" rx="4" fill="#16856b"/>
+<text x="496.2" y="207" font-size="16">38 с</text>
+<text x="24" y="265" font-size="18">Total duration: сравнение последовательного и параллельного CI</text>
+<text x="24" y="307" font-size="16">Последовательный</text>
+<rect x="300" y="285" width="343" height="32" rx="4" fill="#16856b"/>
+<text x="653.0" y="307" font-size="16">42 с</text>
+<text x="24" y="357" font-size="16">Параллельный</text>
+<rect x="300" y="335" width="375.667" height="32" rx="4" fill="#d68a23"/>
+<text x="685.6666666666667" y="357" font-size="16">46 с</text>
+<text x="24" y="410" font-size="14">Подготовительные запуски исключены; сравнение выполнено внутри каждого показателя.</text>
+<text x="24" y="438" font-size="14">Источник: ci-measurements.csv. Повторные запуски одной версии кода при готовом кеше.</text>
+</g>
+</svg>
