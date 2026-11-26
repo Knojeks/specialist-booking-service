@@ -1,26 +1,35 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Каталог врачей</title>
-</head>
-<body>
-<h1>Каталог врачей</h1>
+@extends('layouts.app')
 
-<ul>
-    @forelse ($doctors as $doctor)
-        <li>
-            <strong>{{ $doctor->name }}</strong>
-            — {{ $doctor->specialty }}
+@section('title', 'Каталог врачей — Запись к врачу')
 
-            <a href="{{ route('doctors.schedule', ['doctor' => $doctor->id]) }}">
-                Расписание
-            </a>
-        </li>
-    @empty
-        <li>Врачи пока не добавлены.</li>
-    @endforelse
-</ul>
-</body>
-</html>
+@section('content')
+    <section class="catalog" aria-labelledby="catalog-title">
+        <h1 id="catalog-title">Каталог врачей</h1>
+        <p class="subtitle">
+            Выберите специалиста и перейдите к его расписанию.
+        </p>
+
+        <div class="doctor-grid">
+            @forelse ($doctors as $doctor)
+                <article class="doctor-card">
+                    <p class="doctor-specialty">
+                        {{ $doctor->specialty }}
+                    </p>
+
+                    <h2>{{ $doctor->name }}</h2>
+
+                    <a
+                        class="button"
+                        href="{{ route('doctors.schedule', ['doctor' => $doctor->id]) }}"
+                    >
+                        Расписание
+                    </a>
+                </article>
+            @empty
+                <div class="notice" role="status">
+                    Врачи пока не добавлены.
+                </div>
+            @endforelse
+        </div>
+    </section>
+@endsection

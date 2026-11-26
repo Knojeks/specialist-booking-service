@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Расписание — {{ $doctor->name }}</title>
-</head>
-<body>
-<a href="{{ route('doctors.index') }}">Вернуться к каталогу</a>
+@extends('layouts.app')
 
-<h1>Расписание врача</h1>
-<p>{{ $doctor->name }} — {{ $doctor->specialty }}</p>
+@section('title', 'Расписание — '.$doctor->name)
 
-<p></p>
-</body>
-</html>
+@section('content')
+    <section class="card" aria-labelledby="schedule-title">
+        <p class="subtitle">
+            <a href="{{ route('doctors.index') }}">
+                ← Вернуться к каталогу
+            </a>
+        </p>
+
+        <h1 id="schedule-title">{{ $doctor->name }}</h1>
+        <p class="subtitle">{{ $doctor->specialty }}</p>
+
+        <div class="notice" role="status">
+            Просмотр свободного времени пока не реализован.
+        </div>
+    </section>
+@endsection
