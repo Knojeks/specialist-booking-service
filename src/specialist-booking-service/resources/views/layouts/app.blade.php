@@ -15,6 +15,8 @@
         </a>
 
         <nav class="header-nav" aria-label="Главная навигация">
+            <a href="{{ route('doctors.index') }}">Каталог врачей</a>
+
             @auth
                 <a href="{{ route('dashboard') }}">Личный кабинет</a>
             @else

@@ -68,6 +68,17 @@ jobs:
       - name: Check code formatting
         run: vendor/bin/pint --test
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
       - name: Run unit tests
         run: php artisan test --testsuite=Unit
 

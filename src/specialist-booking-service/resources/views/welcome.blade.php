@@ -7,22 +7,21 @@
         <h1 id="home-title">Запись к врачу</h1>
 
         <p class="subtitle">
-            Выбирайте специалиста и планируйте посещение клиники.
+            Найдите подходящего специалиста и перейдите к его расписанию.
         </p>
 
-        @auth
-            <a class="button button-full" href="{{ route('dashboard') }}">
-                Открыть личный кабинет
-            </a>
-        @else
-            <a class="button button-full" href="{{ route('register') }}">
-                Создать аккаунт
-            </a>
+        <a class="button button-full" href="{{ route('doctors.index') }}">
+            Выбрать врача
+        </a>
 
-            <p class="form-footer">
-                Уже зарегистрированы?
+        <p class="form-footer">
+            @auth
+                <a href="{{ route('dashboard') }}">Личный кабинет</a>
+            @else
                 <a href="{{ route('login') }}">Войти</a>
-            </p>
-        @endauth
+                или
+                <a href="{{ route('register') }}">создать аккаунт</a>
+            @endauth
+        </p>
     </section>
 @endsection
