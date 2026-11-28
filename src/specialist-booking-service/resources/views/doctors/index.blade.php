@@ -24,6 +24,14 @@
                     >
                         Расписание
                     </a>
+
+                    @if (auth()->user()?->is_admin)
+                        <p>
+                            <a href="{{ route('admin.appointment-slots.create', ['doctor' => $doctor->id]) }}">
+                                Добавить время приёма
+                            </a>
+                        </p>
+                    @endif
                 </article>
             @empty
                 <div class="notice" role="status">
