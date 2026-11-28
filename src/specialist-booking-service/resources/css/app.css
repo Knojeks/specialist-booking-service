@@ -93,7 +93,8 @@ label {
     font-weight: 600;
 }
 
-input {
+input,
+select {
     width: 100%;
     padding: 13px 14px;
     border: 1px solid #aab9cd;
@@ -104,13 +105,15 @@ input {
 }
 
 input:focus-visible,
+select:focus-visible,
 a:focus-visible,
 button:focus-visible {
     outline: 3px solid #245dcc;
     outline-offset: 3px;
 }
 
-input[aria-invalid="true"] {
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
     border-color: #b42318;
 }
 

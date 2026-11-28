@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AppointmentSlotController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorScheduleController;
@@ -36,3 +37,18 @@ Route::view('/dashboard', 'dashboard')
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/doctors/{doctor}/appointment-slots/create', [
+            AppointmentSlotController::class,
+            'create',
+        ])->name('appointment-slots.create');
+
+        Route::post('/doctors/{doctor}/appointment-slots', [
+            AppointmentSlotController::class,
+            'store',
+        ])->name('appointment-slots.store');
+    });
